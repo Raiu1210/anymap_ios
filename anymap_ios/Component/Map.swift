@@ -12,16 +12,15 @@ import CoreLocation
 
 struct Map: UIViewRepresentable {
     
-    @Binding var manager : CLLocationManager
-    @Binding var alert : Bool
     let map = MKMapView()
-    
     
     func makeCoordinator() -> Map.Coordinator {
         Coordinator(parent1: self)
     }
     
     func makeUIView(context: Context) -> MKMapView {
+        let manager = CLLocationManager()
+        
         manager.delegate = context.coordinator
         manager.requestAlwaysAuthorization()
         manager.activityType = .automotiveNavigation

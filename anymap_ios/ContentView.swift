@@ -10,14 +10,9 @@ import SwiftUI
 import MapKit
 
 struct ContentView: View {
-    @State var manager = CLLocationManager()
-    @State var alert = false
-    
     var body: some View {
         VStack {
-            Map(manager:$manager, alert:$alert).alert(isPresented:$alert) {
-                Alert(title: Text("Please enable location access"))
-            }
+            MainView()
         }
     }
 }

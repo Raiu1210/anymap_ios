@@ -15,7 +15,8 @@
 		3BA45BA52459470A003DF49C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BA45BA32459470A003DF49C /* LaunchScreen.storyboard */; };
 		3BA45BB0245956F8003DF49C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA45BAF245956F8003DF49C /* API.swift */; };
 		3BA45BB224595F92003DF49C /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA45BB124595F92003DF49C /* Map.swift */; };
-		3BA45BB4245D0F61003DF49C /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA45BB3245D0F61003DF49C /* NavigationView.swift */; };
+		3BA45BB8245D1194003DF49C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA45BB7245D1194003DF49C /* MainView.swift */; };
+		3BA45BBA245D1239003DF49C /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA45BB9245D1239003DF49C /* MainTabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +30,8 @@
 		3BA45BA62459470A003DF49C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BA45BAF245956F8003DF49C /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		3BA45BB124595F92003DF49C /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
-		3BA45BB3245D0F61003DF49C /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
+		3BA45BB7245D1194003DF49C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		3BA45BB9245D1239003DF49C /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +105,8 @@
 		3BA45BAE245955E7003DF49C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3BA45BB3245D0F61003DF49C /* NavigationView.swift */,
+				3BA45BB7245D1194003DF49C /* MainView.swift */,
+				3BA45BB9245D1239003DF49C /* MainTabView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -180,10 +183,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BA45BB224595F92003DF49C /* Map.swift in Sources */,
+				3BA45BB8245D1194003DF49C /* MainView.swift in Sources */,
 				3BA45B9924594706003DF49C /* AppDelegate.swift in Sources */,
 				3BA45B9B24594706003DF49C /* SceneDelegate.swift in Sources */,
+				3BA45BBA245D1239003DF49C /* MainTabView.swift in Sources */,
 				3BA45BB0245956F8003DF49C /* API.swift in Sources */,
-				3BA45BB4245D0F61003DF49C /* NavigationView.swift in Sources */,
 				3BA45B9D24594706003DF49C /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
