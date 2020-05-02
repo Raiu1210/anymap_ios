@@ -13,10 +13,15 @@ import CoreLocation
 struct Map: UIViewRepresentable {
     
     let map = MKMapView()
+    @ObservedObject var api = API()
     
+    init() {
+        print("Map!")
+    }
     func makeCoordinator() -> Map.Coordinator {
         Coordinator(parent1: self)
     }
+    
     
     func makeUIView(context: Context) -> MKMapView {
         let manager = CLLocationManager()
@@ -38,11 +43,11 @@ struct Map: UIViewRepresentable {
     
     
     class Coordinator : NSObject, CLLocationManagerDelegate {
-        
         var parent : Map
         init(parent1:Map) {
             parent = parent1
         }
+        
         func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
             if status == .denied {
                 print("denied")

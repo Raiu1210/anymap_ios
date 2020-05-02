@@ -9,17 +9,18 @@
 import Foundation
 
 
-class API {
+class API : ObservableObject {
     let server_url = "http://zihankimap.work/"
-    
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
     
-    func sayHello() {
-        print("hello")
+    @Published var pin_data:[Restroom_data] = []
+    
+    init() {
+        get_restroom_list()
     }
     
-    func get_restroom_list() -> [Restroom_data] {
+    func get_restroom_list() {
         let semaphore = DispatchSemaphore(value: 0)
         let destination = server_url + "datalist?table_id=2"
         let url = URL(string: destination)!
@@ -27,13 +28,13 @@ class API {
         let session = URLSession.shared
         let request = URLRequest(url: url)
         
-        var recv_obj:[Restroom_data] = []
+//        var recv_obj:[Restroom_data] = []
         
         session.dataTask(with: request) {
             (data, response, error) in if error == nil, let data = data, let _ = response as? HTTPURLResponse {
                 
                 do {
-                    recv_obj = try! self.decoder.decode([Restroom_data].self, from: data)
+                    self.pin_data = try! self.decoder.decode([Restroom_data].self, from: data)
                     semaphore.signal()
                 } catch {
                     print("Error:\(error)")
@@ -43,7 +44,7 @@ class API {
             }.resume()
         semaphore.wait()
         
-        return recv_obj
+//        return recv_obj
     }
 }
 

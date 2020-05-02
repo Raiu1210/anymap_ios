@@ -10,30 +10,28 @@ import SwiftUI
 import MapKit
 
 struct MainTabView: View {
-//    @State var manager = CLLocationManager()
-//    @State var alert = false
-    
     var body: some View {
         TabView {
-            Map() 
+            Map()
                 .tabItem {
                     Image(systemName: "house")
-                }
-            
+            }.onAppear {
+                print("Map")
+            }
             Text("Search friend")
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                 }
             
-            Text("Notification")
-                .tabItem{
-                    Image(systemName: "bell")
-                }
-            
-            Text("Setting")
-                .tabItem {
-                    Image(systemName: "gear")
-                }
+//            Text("Notification")
+//                .tabItem{
+//                    Image(systemName: "bell")
+//                }
+//
+//            Text("Setting")
+//                .tabItem {
+//                    Image(systemName: "gear")
+//                }
         }
         .font(.title)
     }

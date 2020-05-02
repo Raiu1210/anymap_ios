@@ -14,6 +14,7 @@ struct MainView: View {
             MainTabView()
             
             .navigationBarTitle(Text("AnyMap"), displayMode: .inline)
+            
         }
     }
 }
