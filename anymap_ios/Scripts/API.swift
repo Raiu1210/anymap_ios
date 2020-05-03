@@ -60,7 +60,7 @@ class API : ObservableObject {
             let coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(lat, lon)
             
 //            annotation.type      = "registered"
-            let title     = pin_data[i].id
+            let title     = pin_data[i].memo
             let timestamp = pin_data[i].updated
             let memo      = pin_data[i].memo
             
@@ -91,18 +91,7 @@ class CustomPointAnnotation: NSObject, MKAnnotation {
 //var memo: String!
 //var pinColor: UIColor = UIColor.blue
 
-class LandmarkAnnotation: NSObject, MKAnnotation {
-    let title: String?
-    let subtitle: String?
-    let coordinate: CLLocationCoordinate2D
-init(title: String?,
-     subtitle: String?,
-     coordinate: CLLocationCoordinate2D) {
-        self.title = title
-        self.subtitle = subtitle
-        self.coordinate = coordinate
-    }
-}
+
 
 
 
