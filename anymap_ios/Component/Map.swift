@@ -11,19 +11,18 @@ import MapKit
 import CoreLocation
 
 struct Map: UIViewRepresentable {
-    
+    let api: API
     let map = MKMapView()
-    @ObservedObject var api = API()
     
-    init() {
-        print("Map!")
-    }
+
     func makeCoordinator() -> Map.Coordinator {
         Coordinator(parent1: self)
     }
     
     
     func makeUIView(context: Context) -> MKMapView {
+        self.api.sayHello()
+        
         let manager = CLLocationManager()
         
         manager.delegate = context.coordinator
@@ -34,11 +33,19 @@ struct Map: UIViewRepresentable {
         manager.startUpdatingLocation()
         
         map.showsUserLocation = true
+        
+        
+        
         return map
     }
     
     func updateUIView(_ view: MKMapView, context: Context) {
-        
+        let annotation = MKPointAnnotation()
+        let location = CLLocationCoordinate2D(latitude: 33.564673, longitude: 130.417230)
+        annotation.coordinate = location
+        annotation.title = "Big Ben"
+        annotation.subtitle = "London"
+        view.addAnnotation(annotation)
     }
     
     

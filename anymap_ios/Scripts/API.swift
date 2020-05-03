@@ -20,15 +20,18 @@ class API : ObservableObject {
         get_restroom_list()
     }
     
+    func sayHello() {
+        print("Hello")
+    }
+    
     func get_restroom_list() {
+        pin_data = []
         let semaphore = DispatchSemaphore(value: 0)
         let destination = server_url + "datalist?table_id=2"
         let url = URL(string: destination)!
         
         let session = URLSession.shared
         let request = URLRequest(url: url)
-        
-//        var recv_obj:[Restroom_data] = []
         
         session.dataTask(with: request) {
             (data, response, error) in if error == nil, let data = data, let _ = response as? HTTPURLResponse {

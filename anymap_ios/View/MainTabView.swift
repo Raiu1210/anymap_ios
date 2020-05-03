@@ -10,28 +10,22 @@ import SwiftUI
 import MapKit
 
 struct MainTabView: View {
+    @ObservedObject var api = API()
+    
     var body: some View {
         TabView {
-            Map()
+            Map(api: self.api)
                 .tabItem {
                     Image(systemName: "house")
             }.onAppear {
-                print("Map")
+                print("Data Update")
+                self.api.get_restroom_list()
             }
             Text("Search friend")
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                 }
             
-//            Text("Notification")
-//                .tabItem{
-//                    Image(systemName: "bell")
-//                }
-//
-//            Text("Setting")
-//                .tabItem {
-//                    Image(systemName: "gear")
-//                }
         }
         .font(.title)
     }
