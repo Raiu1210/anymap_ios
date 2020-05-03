@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import MapKit
 
 class API : ObservableObject {
     let server_url = "http://zihankimap.work/"
@@ -15,6 +15,7 @@ class API : ObservableObject {
     let decoder = JSONDecoder()
     
     @Published var pin_data:[Restroom_data] = []
+    @Published var annotaions:[CustomPointAnnotation] = []
     
     init() {
         get_restroom_list()
@@ -33,21 +34,73 @@ class API : ObservableObject {
         let session = URLSession.shared
         let request = URLRequest(url: url)
         
-        session.dataTask(with: request) {
-            (data, response, error) in if error == nil, let data = data, let _ = response as? HTTPURLResponse {
-                
-                do {
-                    self.pin_data = try! self.decoder.decode([Restroom_data].self, from: data)
-                    semaphore.signal()
-                } catch {
-                    print("Error:\(error)")
-                }
+        DispatchQueue.main.async {
+            session.dataTask(with: request) {
+                (data, response, error) in if error == nil, let data = data, let _ = response as? HTTPURLResponse {
                     
-                }
-            }.resume()
-        semaphore.wait()
-        
-//        return recv_obj
+                    do {
+                        self.pin_data = try! self.decoder.decode([Restroom_data].self, from: data)
+                        semaphore.signal()
+                    } catch {
+                        print("Error:\(error)")
+                    }
+                        
+                    }
+                }.resume()
+            self.convert_annotaions()
+            semaphore.wait()
+        }
+    }
+    
+    func convert_annotaions() {
+        var temp_annotations: [CustomPointAnnotation] = []
+        for i in 0 ..< pin_data.count {
+            let lat:CLLocationDegrees = Double(pin_data[i].latitude)!
+            let lon:CLLocationDegrees = Double(pin_data[i].longitude)!
+            let coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(lat, lon)
+            
+//            annotation.type      = "registered"
+            let title     = pin_data[i].id
+            let timestamp = pin_data[i].updated
+            let memo      = pin_data[i].memo
+            
+            let annotation = CustomPointAnnotation(title: title, subtitle: memo, coordinate: coordinate)
+            temp_annotations.append(annotation)
+        }
+        self.annotaions = temp_annotations
+    }
+}
+
+
+class CustomPointAnnotation: NSObject, MKAnnotation {
+    let title: String?
+    let subtitle: String?
+    let coordinate: CLLocationCoordinate2D
+    
+    init(title: String?, subtitle: String?, coordinate: CLLocationCoordinate2D) {
+        self.title = title
+        self.subtitle = subtitle
+        self.coordinate = coordinate
+    }
+}
+
+//
+//var type: String!
+//var id: String!
+//var timestamp: String!
+//var memo: String!
+//var pinColor: UIColor = UIColor.blue
+
+class LandmarkAnnotation: NSObject, MKAnnotation {
+    let title: String?
+    let subtitle: String?
+    let coordinate: CLLocationCoordinate2D
+init(title: String?,
+     subtitle: String?,
+     coordinate: CLLocationCoordinate2D) {
+        self.title = title
+        self.subtitle = subtitle
+        self.coordinate = coordinate
     }
 }
 

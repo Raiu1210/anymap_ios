@@ -21,8 +21,6 @@ struct Map: UIViewRepresentable {
     
     
     func makeUIView(context: Context) -> MKMapView {
-        self.api.sayHello()
-        
         let manager = CLLocationManager()
         
         manager.delegate = context.coordinator
@@ -40,12 +38,14 @@ struct Map: UIViewRepresentable {
     }
     
     func updateUIView(_ view: MKMapView, context: Context) {
-        let annotation = MKPointAnnotation()
-        let location = CLLocationCoordinate2D(latitude: 33.564673, longitude: 130.417230)
-        annotation.coordinate = location
-        annotation.title = "Big Ben"
-        annotation.subtitle = "London"
-        view.addAnnotation(annotation)
+        print(api.annotaions.count)
+        
+        for i in 0 ..< api.annotaions.count {
+            view.addAnnotation(api.annotaions[i])
+        }
+        
+        
+        view.addAnnotations(api.annotaions)
     }
     
     
