@@ -76,6 +76,32 @@ struct Map: UIViewRepresentable {
             }
         }
         
+        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            if annotation is MKUserLocation { return nil }
+            let CustomAnnotation = annotation as! CustomPointAnnotation
+            let annotationView = MKMarkerAnnotationView(annotation: CustomAnnotation, reuseIdentifier: nil)
+            
+            
+            if(CustomAnnotation.type == "registered") {
+                print("Hey")
+            }
+//            if annotation is MKUserLocation {
+//                return nil
+//            }
+//            let cluster = "registered"
+//            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: cluster)
+//            guard let markerAnnotationView = annotationView as? MKMarkerAnnotationView,
+//                let annotation = annotation as? CustomPointAnnotation else { return annotationView }
+//            let type = String((annotation).type ?? "AAA")
+//
+//            print(type)
+////            if(type == cluster) {
+////                print("registered pin!")
+////            }
+//
+            return annotationView
+        }
+        
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
             print("Selected ")
             if(view.annotation?.title == "My Location"){
