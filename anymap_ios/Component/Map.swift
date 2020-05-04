@@ -39,17 +39,12 @@ struct Map: UIViewRepresentable {
     
     func updateUIView(_ view: MKMapView, context: Context) {
         print(api.annotaions.count)
-        
-        for i in 0 ..< api.annotaions.count {
-            view.addAnnotation(api.annotaions[i])
-        }
-        
-        
+        view.delegate = context.coordinator
         view.addAnnotations(api.annotaions)
     }
     
     
-    class Coordinator : NSObject, CLLocationManagerDelegate {
+    class Coordinator : NSObject, CLLocationManagerDelegate, MKMapViewDelegate {
         var parent : Map
         init(parent1:Map) {
             parent = parent1
@@ -79,6 +74,34 @@ struct Map: UIViewRepresentable {
                 let region = MKCoordinateRegion(center: location!.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
                 self.parent.map.region = region
             }
+        }
+        
+        func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+            print("Selected ")
+            if(view.annotation?.title == "My Location"){
+                print("this is my location")
+                return
+            }
+            
+            var annotation_subtitle:String = ""
+            annotation_subtitle = String((view.annotation?.subtitle ?? "more")!)
+            if(annotation_subtitle.suffix(4) == "more") {
+                print("this is cluster")
+            } else {
+//                floatingPanelController.show(animated: true)
+//                let type = String((view.annotation as! CustomPointAnnotation).type)
+//                let id = String((view.annotation as! CustomPointAnnotation).id)
+//                let memo = String((view.annotation as! CustomPointAnnotation).memo)
+//                let timestamp = String((view.annotation as! CustomPointAnnotation).timestamp)
+                let latitude = String(Double(view.annotation?.coordinate.latitude ?? 0.000000000))
+                let longitude = String(Double(view.annotation?.coordinate.longitude ?? 0.00000000))
+                print(latitude)
+                print(longitude)
+//                semiModalViewController.update_SemiModalView(type:type, id:id, latitude:latitude, longitude:longitude, timestamp:timestamp, memo:memo)
+            }
+            
+            print(view.annotation?.title)
+            print(view.annotation?.subtitle)
         }
     }
 }

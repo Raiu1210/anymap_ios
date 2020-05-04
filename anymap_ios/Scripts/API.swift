@@ -59,12 +59,11 @@ class API : ObservableObject {
             let lon:CLLocationDegrees = Double(pin_data[i].longitude)!
             let coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(lat, lon)
             
-//            annotation.type      = "registered"
+            let type      = "registered"
             let title     = pin_data[i].memo
-            let timestamp = pin_data[i].updated
-            let memo      = pin_data[i].memo
+            let timestamp = pin_data[i].updated + "に登録"
             
-            let annotation = CustomPointAnnotation(title: title, subtitle: memo, coordinate: coordinate)
+            let annotation = CustomPointAnnotation(type:type, title: title, subtitle: timestamp, coordinate: coordinate)
             temp_annotations.append(annotation)
         }
         self.annotaions = temp_annotations
@@ -73,25 +72,19 @@ class API : ObservableObject {
 
 
 class CustomPointAnnotation: NSObject, MKAnnotation {
+    let type: String?
     let title: String?
     let subtitle: String?
     let coordinate: CLLocationCoordinate2D
     
-    init(title: String?, subtitle: String?, coordinate: CLLocationCoordinate2D) {
+    
+    init(type:String ,title: String?, subtitle: String?, coordinate: CLLocationCoordinate2D) {
+        self.type = type
         self.title = title
         self.subtitle = subtitle
         self.coordinate = coordinate
     }
 }
-
-//
-//var type: String!
-//var id: String!
-//var timestamp: String!
-//var memo: String!
-//var pinColor: UIColor = UIColor.blue
-
-
 
 
 
