@@ -81,24 +81,10 @@ struct Map: UIViewRepresentable {
             let CustomAnnotation = annotation as! CustomPointAnnotation
             let annotationView = MKMarkerAnnotationView(annotation: CustomAnnotation, reuseIdentifier: nil)
             
-            
             if(CustomAnnotation.type == "registered") {
                 print("Hey")
             }
-//            if annotation is MKUserLocation {
-//                return nil
-//            }
-//            let cluster = "registered"
-//            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: cluster)
-//            guard let markerAnnotationView = annotationView as? MKMarkerAnnotationView,
-//                let annotation = annotation as? CustomPointAnnotation else { return annotationView }
-//            let type = String((annotation).type ?? "AAA")
-//
-//            print(type)
-////            if(type == cluster) {
-////                print("registered pin!")
-////            }
-//
+
             return annotationView
         }
         

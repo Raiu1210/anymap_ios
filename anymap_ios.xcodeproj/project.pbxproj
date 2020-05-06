@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,7 @@
 		3BA45BB224595F92003DF49C /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA45BB124595F92003DF49C /* Map.swift */; };
 		3BA45BB8245D1194003DF49C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA45BB7245D1194003DF49C /* MainView.swift */; };
 		3BA45BBA245D1239003DF49C /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA45BB9245D1239003DF49C /* MainTabView.swift */; };
+		3BDA0B57246281E60053BBC9 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 3BDA0B56246281E60053BBC9 /* PartialSheet */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BDA0B57246281E60053BBC9 /* PartialSheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +129,9 @@
 			dependencies = (
 			);
 			name = anymap_ios;
+			packageProductDependencies = (
+				3BDA0B56246281E60053BBC9 /* PartialSheet */,
+			);
 			productName = anymap_ios;
 			productReference = 3BA45B9524594706003DF49C /* anymap_ios.app */;
 			productType = "com.apple.product-type.application";
@@ -155,6 +160,9 @@
 				Base,
 			);
 			mainGroup = 3BA45B8C24594706003DF49C;
+			packageReferences = (
+				3BDA0B55246281E60053BBC9 /* XCRemoteSwiftPackageReference "PartialSheet" */,
+			);
 			productRefGroup = 3BA45B9624594706003DF49C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -382,6 +390,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3BDA0B55246281E60053BBC9 /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AndreaMiotto/PartialSheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3BDA0B56246281E60053BBC9 /* PartialSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3BDA0B55246281E60053BBC9 /* XCRemoteSwiftPackageReference "PartialSheet" */;
+			productName = PartialSheet;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3BA45B8D24594706003DF49C /* Project object */;
 }

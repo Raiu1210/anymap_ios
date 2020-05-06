@@ -8,9 +8,11 @@
 
 import SwiftUI
 import MapKit
+import PartialSheet
 
 struct MainTabView: View {
     @ObservedObject var api = API()
+    @EnvironmentObject var partialSheetManager: PartialSheetManager
     
     var body: some View {
         TabView {
@@ -21,7 +23,24 @@ struct MainTabView: View {
                 print("Data Update")
                 self.api.get_restroom_list()
             }
-            Text("Search friend")
+            Button("Hey", action: {
+                self.partialSheetManager.showPartialSheet({
+                    print("Partial sheet dismissed")
+                }) {
+                    Button("Close", action:  {
+                        self.partialSheetManager.closePartialSheet()
+                    })
+                    Text("Hey")
+                    Text("Hey")
+                    Text("Hey")
+                    Text("Hey")
+                    Text("Hey")
+                    Text("Hey")
+                    Text("Hey")
+                    Text("Hey")
+                    Text("Hey")
+                }
+            })
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                 }
