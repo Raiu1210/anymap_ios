@@ -10,9 +10,18 @@ import SwiftUI
 import MapKit
 
 struct ContentView: View {
+    var showModal = false
+    
     var body: some View {
-        VStack {
-            MainView().addPartialSheet()
+        ZStack {
+            MainView()
+                .addPartialSheet()
+            
+            if showModal {
+                BottomSheet(isOpen: .constant(true), maxHeight: 300) {
+                    Rectangle().fill()
+                }.edgesIgnoringSafeArea(.all)
+            }
         }
     }
 }

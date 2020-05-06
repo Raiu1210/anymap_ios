@@ -16,7 +16,7 @@ struct MainTabView: View {
     
     var body: some View {
         TabView {
-            Map(api: self.api)
+            MapView()
                 .tabItem {
                     Image(systemName: "house")
             }.onAppear {
@@ -27,18 +27,11 @@ struct MainTabView: View {
                 self.partialSheetManager.showPartialSheet({
                     print("Partial sheet dismissed")
                 }) {
-                    Button("Close", action:  {
-                        self.partialSheetManager.closePartialSheet()
-                    })
+//                    Button("Close", action:  {
+//                        self.partialSheetManager.closePartialSheet()
+//                    })
                     Text("Hey")
-                    Text("Hey")
-                    Text("Hey")
-                    Text("Hey")
-                    Text("Hey")
-                    Text("Hey")
-                    Text("Hey")
-                    Text("Hey")
-                    Text("Hey")
+                    .frame(height: 200)
                 }
             })
                 .tabItem {

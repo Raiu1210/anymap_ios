@@ -9,14 +9,16 @@
 import SwiftUI
 import MapKit
 import CoreLocation
+import PartialSheet
 
 struct Map: UIViewRepresentable {
+    @EnvironmentObject var partialSheetManager: PartialSheetManager
     let api: API
     let map = MKMapView()
     
 
     func makeCoordinator() -> Map.Coordinator {
-        Coordinator(parent1: self)
+        Coordinator(parent1: self, partialSheetManager: partialSheetManager)
     }
     
     
@@ -32,8 +34,6 @@ struct Map: UIViewRepresentable {
         
         map.showsUserLocation = true
         
-        
-        
         return map
     }
     
@@ -44,10 +44,13 @@ struct Map: UIViewRepresentable {
     }
     
     
-    class Coordinator : NSObject, CLLocationManagerDelegate, MKMapViewDelegate {
+    class Coordinator : NSObject, CLLocationManagerDelegate, MKMapViewDelegate, ObservableObject {
+        var partialSheetManager: PartialSheetManager
+        var sheetManager: PartialSheetManager = PartialSheetManager()
         var parent : Map
-        init(parent1:Map) {
-            parent = parent1
+        init(parent1:Map, partialSheetManager:PartialSheetManager) {
+            self.parent = parent1
+            self.partialSheetManager = partialSheetManager
         }
         
         func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -82,7 +85,7 @@ struct Map: UIViewRepresentable {
             let annotationView = MKMarkerAnnotationView(annotation: CustomAnnotation, reuseIdentifier: nil)
             
             if(CustomAnnotation.type == "registered") {
-                print("Hey")
+                // do something here
             }
 
             return annotationView
@@ -99,18 +102,27 @@ struct Map: UIViewRepresentable {
             annotation_subtitle = String((view.annotation?.subtitle ?? "more")!)
             if(annotation_subtitle.suffix(4) == "more") {
                 print("this is cluster")
-            } else {
-//                floatingPanelController.show(animated: true)
-//                let type = String((view.annotation as! CustomPointAnnotation).type)
-//                let id = String((view.annotation as! CustomPointAnnotation).id)
-//                let memo = String((view.annotation as! CustomPointAnnotation).memo)
-//                let timestamp = String((view.annotation as! CustomPointAnnotation).timestamp)
-                let latitude = String(Double(view.annotation?.coordinate.latitude ?? 0.000000000))
-                let longitude = String(Double(view.annotation?.coordinate.longitude ?? 0.00000000))
-                print(latitude)
-                print(longitude)
-//                semiModalViewController.update_SemiModalView(type:type, id:id, latitude:latitude, longitude:longitude, timestamp:timestamp, memo:memo)
+                return
             }
+            print("Hey")
+            
+            self.partialSheetManager.showPartialSheet({
+                print("Partial sheet dismissed")
+            }) {
+                Button("Close", action:  {
+                    self.partialSheetManager.closePartialSheet()
+                })
+                .frame(height: 200)
+                Text("Hey")
+                Spacer()
+                
+            }
+            let latitude = String(Double(view.annotation?.coordinate.latitude ?? 0.000000000))
+            let longitude = String(Double(view.annotation?.coordinate.longitude ?? 0.00000000))
+            print(latitude)
+            print(longitude)
+//                semiModalViewController.update_SemiModalView(type:type, id:id, latitude:latitude, longitude:longitude, timestamp:timestamp, memo:memo)
+        
             
             print(view.annotation?.title)
             print(view.annotation?.subtitle)
